@@ -30,7 +30,9 @@ function createTable(table, date, fnc) {
     let infspan = document.getElementById("currentMonth");
     infspan.innerText = monthNames[date.getMonth()] + " " + date.getFullYear();
 
+    // increase button
     let incbtn = document.getElementById("incMonth");
+    // decrease button
     let decbtn = document.getElementById("decMonth");
 
     incbtn.addEventListener("click", () => updateTable(table, dateZero, +1, fnc));
@@ -49,6 +51,7 @@ function updateTable(table, date, value, fnc) {
 function clearTable(table) {
     let rows = table.rows;
     let i = rows.length;
+    // Until i is equal to 0 decrease by 1 and use as i as the index of the row
     while (--i) {
         rows[i].parentNode.removeChild(rows[i]);
     }
