@@ -58,6 +58,7 @@ function switchToDate(date) {
     if (date) {
         updateDate(date, 0);
         //TODO Buchung init
+        createStandartSiteContent(replaceBody());
         createBookingForm(date);
     }
 }

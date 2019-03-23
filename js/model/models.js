@@ -87,7 +87,6 @@ class Buchung{
         bikes.push(bike);
     };
 
-    
     removeBike(bike) {
         bikes.splice(bikes.indexOf(bike), 1);
     };

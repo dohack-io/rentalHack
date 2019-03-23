@@ -15,7 +15,7 @@ body {
         'container container2'
         'container3 container3';
     grid-template-columns: 50% 50%;
-    grid-template-rows: 5% 5% 35% 55%;
+    grid-template-rows: 5% 5% 35% 55% auto;
 }
 
 #newbike { grid-area: container; width: 100%;}
