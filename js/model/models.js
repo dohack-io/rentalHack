@@ -91,7 +91,7 @@ function getBookingFromObject(object){
     for(let i = 0; i < object.bikes.length; i++){
         bikes.push(getBikeFromObject(object.bikes[i]));
     }
-    return new Buchung(bikes, object.kunde, object.daten, object.abholzeitpunkt, object.abgabezeitpunkt);
+    return new Buchung(ident, bikes, object.kunde, object.abholzeitpunkt, object.abgabezeitpunkt);
 }
 
 class Datum{
@@ -107,4 +107,12 @@ class Datum{
     removeDate(date) {
         date.splice(date.indexOf(date), 1);
     };
+}
+
+function getDateFromObject(object){
+    let bookings = [];
+    for(let i = 0; i < object.bookings.length; i++){
+        bookings.push(getDateFromObject(object.bookings[i]));
+    }
+    return new Date(object.date, bookings);
 }
