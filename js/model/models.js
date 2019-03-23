@@ -68,8 +68,8 @@ function getCustomerFromObject(object){
 }
 
 class Buchung{
-    constructor(id, bikes, kunde, abholzeitpunkt, abgabezeitpunkt) {
-        this.id = id;
+    constructor(ident, bikes, kunde, abholzeitpunkt, abgabezeitpunkt) {
+        this.ident = ident;
         this.bikes = bikes;
         this.kunde = kunde;
         this.abholzeitpunkt = abholzeitpunkt;
