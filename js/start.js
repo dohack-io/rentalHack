@@ -6,7 +6,7 @@ let storeArray = new ObservableArray();
 let test = true;
 let copyForTest = false;
 
-loadingNav();
+//loadingNav();
 
 
 function loadDocument(syncClient, docname, loadFnc, watchArray) {
@@ -142,4 +142,4 @@ function removeAllDocuments() {
     storeArray = [];
 }
 
-corsRequest("https://almond-dunlin-3705.twil.io/sync-token", reqListener);
+//corsRequest("https://almond-dunlin-3705.twil.io/sync-token", reqListener);

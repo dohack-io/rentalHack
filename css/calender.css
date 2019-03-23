@@ -3,9 +3,6 @@
     text-align: center;
 }
 
-#calenderHeader {
-}
-
 #calenderTable { /* (0,1,0,0) */
     border-collapse: collapse;
     width: 100%;
