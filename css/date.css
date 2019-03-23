@@ -1,0 +1,13 @@
+#prevDay {
+    margin-right: 1em;
+    top: 0;
+}
+
+#nextDay {
+    margin-left: 1em;
+}
+
+#dateDisplay {
+    font-size: x-large;
+    font-weight: bold;
+}

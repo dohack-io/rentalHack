@@ -1,0 +1,71 @@
+:root {
+    --nav-bg-default        : #9b59b6;
+    --nav-bg-highlight      : #7a3c96;
+    --nav-bg-hover-active   : #ff00ff;
+    --nav-col-Default       : #ecf0f1;
+    --nav-col-Hover         : #ecdbff
+}
+
+body {
+    display: grid;
+    grid-template-areas:
+        'nav nav'
+        'location date'
+        'calenderApp date'
+        'container container2'
+        'container3 container3';
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 5% 5% 35% 55%;
+}
+
+#newbike { grid-area: container; width: 100%;}
+#newstore { grid-area: container; width: 100%;}
+#newcustomer { grid-area: container; width: 100%;}
+#loading { grid-area: container3; width: 100%; text-align: center; }
+#newBooking { grid-area: container; width: 100%; }
+#newBookingBikes { grid-area: container2; width: 100%; }
+#monthViewDiv { grid-area: container3; width:100%; }
+
+#navigationTop { grid-area: nav; margin-bottom: 1em; }
+#location { grid-area: location; margin-bottom: 1em; }
+#calender { grid-area: calenderApp; }
+#date { grid-area: date; }
+
+#navigationTop ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: var(--nav-bg-default);
+}
+
+#navigationTop li {
+    float: left;
+}
+
+#navigationTop li a {
+    display: block;
+    color: var(--nav-col-Default);
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+#navigationTop li a:hover:not(.active) {
+    background-color: var(--nav-bg-highlight);
+    color: var(--nav-col-Hover)
+}
+
+#navigationTop li a:hover {
+    background-color: var(--nav-bg-hover-active);
+}
+
+
+#navigationTop .active {
+    background-color: var(--nav-bg-highlight);
+}
+
+button {
+    min-width: 40px;
+    margin-bottom: 0.5em;
+}

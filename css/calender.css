@@ -1,0 +1,61 @@
+#calender {
+    width: 99%;
+    text-align: center;
+}
+
+#calenderHeader {
+}
+
+#calenderTable { /* (0,1,0,0) */
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#calenderTable tr { /* (0,1,0,1) */
+    border: solid;
+    border-width: 1px 0;
+    height: 2.5em;
+}
+
+#calender span {
+    font-size: x-large;
+    font-weight: bold;
+}
+
+#calenderTable td, #calenderTable th { /* (0,1,0,1) */
+    overflow-wrap: break-word;
+    border-left: 1px solid #000;
+    border-right: 1px solid #000;
+    width: 14.28%
+}
+
+#incMonth {
+    float: right;
+}
+
+#decMonth {
+    float: left;
+}
+
+table td.divide{
+    background-image: linear-gradient(
+            to top left,
+            white 48%,
+            black,
+            white 52%
+    );
+}
+
+.top-left {
+    text-align: left;
+    vertical-align: text-top;
+    padding: 0.5em;
+    margin-top: -0.8em;
+}
+
+.bottom-right {
+    text-align: right;
+    vertical-align: text-bottom;
+    padding: 0;
+    margin-bottom: -0.8em;
+}

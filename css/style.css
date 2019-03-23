@@ -1,0 +1,74 @@
+form input:invalid {
+    background-color: rgba(255, 0, 0, 0.36);
+}
+
+form input:required+span:after {
+    content: "(erforderliche Eingabe)";
+    color: red;
+}
+
+form input:required:invalid::before {
+    color: red;
+}
+
+fieldset {
+    padding: 5px;
+    margin: 5px;
+    border: solid 2px;
+    border-radius: 5px 5px 5px 5px;
+}
+
+fieldset input, fieldset select {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    display:inline-block;
+    *display: inline;     /* for IE7*/
+    zoom:1;              /* for IE7*/
+    vertical-align:middle;
+    margin-left:20px
+}
+
+fieldset label {
+    display:inline-block;
+    *display: inline;     /* for IE7*/
+    zoom:1;              /* for IE7*/
+    float: left;
+    padding-top: 5px;
+    text-align: right;
+    width: 140px;
+}
+
+#location select {
+    width: 99%;
+}
+
+#monthViewTable { /* (0,1,0,0) */
+    border-collapse: collapse;
+    width: 100%;
+    font-size: medium;
+}
+
+#monthViewTable tr { /* (0,1,0,1) */
+    border: solid;
+    border-width: 1px 0;
+    height: 2em;
+}
+
+#monthViewTable td, #monthViewTable th { /* (0,1,0,1) */
+    overflow-wrap: break-word;
+    border-left: 1px solid #000;
+    border-right: 1px solid #000;
+}
+
+#monthViewTable tr:nth-child(-n+4) {
+    width: fit-content;
+}
+
+#monthViewDiv {
+    width: 99%;
+    text-align: center;
+}
+
+#monthViewTable .weekend{
+    background-color: rgba(255, 255, 0, 0.33);
+}
