@@ -13,9 +13,9 @@ body {
         'location date'
         'calenderApp date'
         'container container2'
-        'container3 container3';
+        'container3 container3'; 
     grid-template-columns: 50% 50%;
-    grid-template-rows: 5% 5% 35% 55% auto;
+    grid-template-rows: auto auto auto auto auto;  /*Browserunabhängig*/
 }
 
 #newbike { grid-area: container; width: 100%;}
