@@ -23,7 +23,7 @@ body {
 #newcustomer { grid-area: container; width: 100%;}
 #loading { grid-area: container3; width: 100%; text-align: center; }
 #newBooking { grid-area: container; width: 100%; }
-#newBookingBikes { grid-area: container2; width: 100%; }
+#bookingList { grid-area: container2; width: 100%; }
 #monthViewDiv { grid-area: container3; width:100%; }
 
 #navigationTop { grid-area: nav; margin-bottom: 1em; }

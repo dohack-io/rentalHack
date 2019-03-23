@@ -94,10 +94,10 @@ function getBookingFromObject(object){
     return new Buchung(ident, bikes, object.kunde, object.abholzeitpunkt, object.abgabezeitpunkt);
 }
 
-class Date{
+class Dates{
     constructor(date, booking_id) {
         this.date = date;
-        this.booking_id = booking_id;
+        this.booking_ids = booking_id;
     }
 
     addDate(date) {
@@ -111,8 +111,8 @@ class Date{
 
 function getDateFromObject(object){
     let bookings = [];
-    for(let i = 0; i < object.bookings.length; i++){
-        bookings.push(getBookingFromObject(object.bookings[i]));
+    for(let i = 0; i < object.booking_ids.length; i++){
+        bookings.push(getBookingFromObject(object.booking_ids[i]));
     }
-    return new Date(object.date, bookings);
+    return new Dates(object.date, bookings);
 }
