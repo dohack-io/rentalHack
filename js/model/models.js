@@ -3,6 +3,7 @@ class Bike {
         this.ident = ident;
         this.bez = bez;
         this.rahmennr = rahmennr;
+        // serial number of the 'akku'
         this.akkuser = akkuser;
         this.store = store;
         if (akkuser) {
@@ -67,21 +68,13 @@ function getCustomerFromObject(object){
 }
 
 class Buchung{
-    constructor(bikes, kunde, daten, abholzeitpunkt, abgabezeitpunkt) {
+    constructor(id, bikes, kunde, abholzeitpunkt, abgabezeitpunkt) {
+        this.id = id;
         this.bikes = bikes;
         this.kunde = kunde;
-        this.daten = daten;
         this.abholzeitpunkt = abholzeitpunkt;
         this.abgabezeitpunkt = abgabezeitpunkt;
     }
-
-    addDate(date) {
-        daten.push(date);
-    };
-
-    removeDate(date) {
-        daten.splice(daten.indexOf(date), 1);
-    };
 
     addBike(bike) {
         bikes.push(bike);
@@ -99,4 +92,19 @@ function getBookingFromObject(object){
         bikes.push(getBikeFromObject(object.bikes[i]));
     }
     return new Buchung(bikes, object.kunde, object.daten, object.abholzeitpunkt, object.abgabezeitpunkt);
+}
+
+class Datum{
+    constructor(date, booking_id) {
+        this.date = date;
+        this.booking_id = booking_id;
+    }
+
+    addDate(date) {
+        date.push(date);
+    };
+
+    removeDate(date) {
+        date.splice(date.indexOf(date), 1);
+    };
 }
