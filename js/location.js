@@ -14,35 +14,6 @@ function createLocation(body) {
     }
 }
 
-function getCurrentStores() {
-    let selector = document.getElementById("storeSelector");
-    let options = selector && selector.options;
-    let selection = [];
-    for (let i = 0; i < options.length; i++) {
-        let selectedOption = options[i];
-        if (selectedOption.selected) {
-            if (selectedOption.value.includes(",")) {
-                let divider = selectedOption.value.split(",");
-                for (let candidate in divider) {
-                    selection.push(divider[candidate]);
-                }
-            } else {
-                selection.push(selectedOption.value || selectedOption.text);
-            }
-        }
-    }
-    let stores = [];
-    for (let i = 0; i < storeArray.length; i++) {
-        for (let j = 0; j < selection.length; j++){
-            if (storeArray[i].store === selection[j]) {
-                stores.push(storeArray[i]);
-                break;
-            }
-        }
-    }
-    return stores;
-}
-
 function updateLocations() {
     let div = document.getElementById("location");
     replaceElem(div, "div");
