@@ -66,6 +66,41 @@ function getStoreFromIdent(ident) {
 }
 
 
+function getCurrentStores() {
+    let selector = document.getElementById("storeSelector");
+    let options = selector && selector.options;
+    let selection = [];
+    let stores = [];
+
+    for (let i = 0; i < options.length; i++) {
+        let selectedOption = options[i];
+
+        if (selectedOption.selected) {
+            if (selectedOption.value.includes(",")) {
+                let divider = selectedOption.value.split(",");
+
+                for (let candidate in divider) {
+                   selection.push(divider[candidate]);
+                }
+
+            } else {
+                selection.push(selectedOption.value || selectedOption.text);
+            }
+        }
+    }
+
+    for (let i = 0; i < storeArray.length; i++) {
+        for (let j = 0; j < selection.length; j++){
+            if (storeArray[i].store === selection[j]) {
+                stores.push(storeArray[i]);
+                break;
+             }
+         }
+    }
+    return stores;
+}
+
+
 /**
  <div id="location">
  <select>
