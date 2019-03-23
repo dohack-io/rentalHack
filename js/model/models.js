@@ -94,7 +94,7 @@ function getBookingFromObject(object){
     return new Buchung(ident, bikes, object.kunde, object.abholzeitpunkt, object.abgabezeitpunkt);
 }
 
-class Datum{
+class Date{
     constructor(date, booking_id) {
         this.date = date;
         this.booking_id = booking_id;
