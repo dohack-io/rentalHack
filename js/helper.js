@@ -53,6 +53,30 @@ function replaceElem(elem, type){
     elem.replaceWith(newElem);
 }
 
+function removeElem(elem){
+    elem.parentNode.removeChild(elem);
+    let parent = elem.parentNode;
+    parent.removeChild(elem);
+    return parent;
+}
+
+function removeElemWithId(id){
+    let selector = document.getElementById(id);
+    let parent = selector.parentNode;
+    parent.removeChild(selector);
+    return parent;
+}
+
+function getIdentForArray(array){
+    array.sort(function(a, b){return a - b});
+    for(let i = 0; i < array.length; i++){
+        if (array[i].ident !== i){
+            return i;
+        }
+    }
+    return array.length + 1;
+}
+
 function reloadCss(){
     let links = document.getElementsByTagName("link");
     for (let cl in links)

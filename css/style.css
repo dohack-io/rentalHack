@@ -72,3 +72,7 @@ fieldset label {
 #monthViewTable .weekend{
     background-color: rgba(255, 255, 0, 0.33);
 }
+
+#newCustomerBtn, #editCustomerBtn {
+    margin-left: 2em;
+}
