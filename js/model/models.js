@@ -112,7 +112,7 @@ class Datum{
 function getDateFromObject(object){
     let bookings = [];
     for(let i = 0; i < object.bookings.length; i++){
-        bookings.push(getDateFromObject(object.bookings[i]));
+        bookings.push(getBookingFromObject(object.bookings[i]));
     }
     return new Date(object.date, bookings);
 }
