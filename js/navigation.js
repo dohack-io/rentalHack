@@ -30,6 +30,7 @@ let newCustomerNav = function () {
     let body = replaceBody();
     createStandartSiteContent(body);
     createCustomerForm(body);
+    createEditCustomerForm(body);
 
     reloadCss();
 };
@@ -73,7 +74,7 @@ const navtuples = [
     ["Neues Fahrrad", newBikeNav],
     ["Neuer Laden", newStoreNav],
     ["Neuer Customer", newCustomerNav],
-    ["Neue Buchung", newBookingNav],
+    ["Neue Booking", newBookingNav],
     ["Monatsansicht", monthViewNav]
 ];
 

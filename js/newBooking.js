@@ -16,9 +16,9 @@ function updateAvailableBikes() {
             }
         }
     }
-    for (let i = 0; i < bikeArray.length; i++) {
-        for (let j = 0; j < selection.length; j++) {
-            if (bikeArray[i].store === selection[j]) {
+    for (let i = 0; i < storeArray.length; i++) {
+        for (let j = 0; j < bikeArray.length; j++) {
+            if (storeArray[i].store === selection[j]) {
                 bikes.push(bikeArray[i]);
                 break;
             }
@@ -46,40 +46,73 @@ function getBookingsForDate(dateTmp) {
     return bookingsAtDate;
 }
 
-function createBooking() {
+function createBooking(form) {
     form.preventDefault();
     let id = bookingArray.length + 1;
-    let marke = document.getElementById("marke").value;
-    let serie = document.getElementById("serie").value;
-    let gang = document.getElementById("gang").value;
-    let zoll = document.getElementById("zoll").value;
-    let bautyp = document.getElementById("bautyp").value;
-    let rahmennr = document.getElementById("rahmennr").value;
-    let akkuser = document.getElementById("akkuser").value;
-    let store = document.getElementById("store").value;
-    let bike = new Bike(id, new Bezeichnung(marke, serie, gang, zoll, bautyp), rahmennr, akkuser, store);
-    if (bike) {
+    let selector = document.getElementById("bikeSelector");
+    let options = selector && selector.options;
+    let selection = [];
+    for (let i = 0; i < options.length; i++) {
+        let selectedOption = options[i];
+        if (selectedOption.selected) {
+            selection.push(selectedOption.value || selectedOption.text)
+        }
+    }
+    let bikes = selection;
+    selector = document.getElementById("customerSelector");
+    options = selector && selector.options;
+    for (let i = 0; i < options.length; i++) {
+        let selectedOption = options[i];
+        if (selectedOption.selected) {
+            selection.push(selectedOption.value || selectedOption.text);
+            break;
+        }
+    }
+    let customer = selection;
+    let startdate = document.getElementById("startdate").value;
+    let deliveryStartTime = document.getElementById("deliveryStartTime").value;
+    let enddate = document.getElementById("enddate").value;
+    let deliveryEndTime = document.getElementById("deliveryEndTime").value;
+    let booking = new Booking(id, bikes, customer, startdate, deliveryStartTime, enddate, deliveryEndTime);
+    if (booking) {
         let inserted = false;
-        for (let i = 0; i < bikeArray.length; i++) {
-            if (bikeArray[i].ident === id) {
-                bikeArray.splice(i, 1, bike);
-                console.log("Bike ersetzt: " + bike.name());
+        for (let i = 0; i < bookingArray.length; i++) {
+            if (bookingArray[i].ident === id) {
+                bookingArray.splice(i, 1, booking);
+                console.log("Booking ersetzt: " + booking.name());
                 inserted = true;
                 break;
             }
         }
         if (!inserted) {
-            bikeArray.push(bike);
-            console.log("Bike angelegt: " + bike.name());
+            bookingArray.push(booking);
+            console.log("Bike angelegt: " + booking.name());
         }
     }
     return true;
 }
 
+function createCustomerFormFromBooking(elem) {
+    removeElemWithId("customerSelector");
+    removeElemWithId("newCustomerBtn");
+    createCustomerForm(elem);
+    removeEventListenerForID("newcustomer");
+    let btn = document.getElementById("bookingBtn").innerText = "Bitte erst Kunden anlegen";
+    btn.setAttribute("disabled", "disabled");
+    let form = document.getElementById("newcustomer");
+    form.addEventListener("submit", () => {
+        let btn = document.getElementById("bookingBtn").innerText = "Booking anlegen";
+        btn.removeAttribute("disabled");
+        createCustomer;
+    });
+}
+
 function createBookingForm(date) {
     let body = document.querySelector("body");
     let form = appendElementAfterCreationWithAttributes(body, "form", [["id", "newBooking"]]);
-    let fieldset = appendElementAfterCreationWithInnerText(form, "fieldset");
+    let formfield = appendElementAfterCreationWithInnerText(form, "fieldset");
+    appendElementAfterCreationWithInnerText(formfield, "legend", "Neue Booking");
+    let fieldset = appendElementAfterCreationWithInnerText(formfield, "fieldset");
     appendElementAfterCreationWithInnerText(fieldset, "legend", "Abholtermin");
     appendElementAfterCreationWithInnerTextAndAttributes(fieldset, "label", "Abholtermin für Leihräder: ", [["for", "startdate"]]);
     appendElementAfterCreationWithAttributes(fieldset, "span");
@@ -92,7 +125,7 @@ function createBookingForm(date) {
         appendElementAfterCreationWithAttributes(fieldset, "input", [["type", "date"], ["id", "startdate"]]);
     }
     appendElementAfterCreationWithAttributes(fieldset, "input", [["type", "time"], ["id", "deliveryStartTime"]]);
-    let fieldset1 = appendElementAfterCreationWithAttributes(form, "fieldset");
+    let fieldset1 = appendElementAfterCreationWithAttributes(formfield, "fieldset");
     appendElementAfterCreationWithInnerTextAndAttributes(fieldset1, "label", "Zeige Fahrräder von: *(multiselect)", [["for", "storeSelector"]]);
     appendElementAfterCreationWithInnerText(fieldset1, "legend", "Ladenauswahl");
     let select = appendElementAfterCreationWithAttributes(fieldset1, "select", [["multiple", "multiple"], ["id", "storeSelector"], ["required", "required"]]);
@@ -108,21 +141,34 @@ function createBookingForm(date) {
     appendElementAfterCreationWithAttributes(fieldset1, "br");
     fieldset1.addEventListener("mouseleave", () => updateAvailableBikes());
     button1.addEventListener("click", () => updateAvailableBikes());
-    let fieldset2 = appendElementAfterCreationWithAttributes(form, "fieldset");
+    let fieldset2 = appendElementAfterCreationWithAttributes(formfield, "fieldset");
     appendElementAfterCreationWithInnerText(fieldset2, "legend", "Rückgabetermin");
     appendElementAfterCreationWithInnerTextAndAttributes(fieldset2, "label", "Abgabetermin für Leihräder: ", [["for", "enddate"]]);
     appendElementAfterCreationWithAttributes(fieldset2, "input", [["type", "date"], ["id", "enddate"], ["value", date]]);
     appendElementAfterCreationWithAttributes(fieldset2, "input", [["type", "time"], ["id", "deliveryEndTime"]]);
     appendElementAfterCreationWithAttributes(body, "form", [["id", "newBookingBikes"]]);
-    let fieldset3 = appendElementAfterCreationWithAttributes(form, "fieldset");
+    let fieldset3 = appendElementAfterCreationWithAttributes(formfield, "fieldset");
     appendElementAfterCreationWithInnerText(fieldset3, "legend", "Räderauswahl");
     appendElementAfterCreationWithAttributes(fieldset3, "select", [["multiple", "multiple"], ["id", "bikeSelector"], ["required", "required"]]);
-    let btn = appendElementAfterCreationWithInnerTextAndAttributes(fieldset3, "input", "anlegen", [["type", "submit"], ["id", "bookingBtn"]]);
-    if (form.attachEvent) {
-        form.attachEvent("submit", createBooking);
-    } else {
-        form.addEventListener("submit", createBooking);
+    let fieldset4 = appendElementAfterCreationWithAttributes(formfield, "fieldset");
+    appendElementAfterCreationWithInnerText(fieldset4, "legend", "Kundenwahl");
+    select = appendElementAfterCreationWithAttributes(fieldset4, "select", [["id", "customerSelector"], ["required", "required"]]);
+    for (let i = 0; i < customerArray.length; i++) {
+        if (i === 0) {
+            appendElementAfterCreationWithInnerTextAndAttributes(select, "option", customerArray[i].name, [["value", customerArray[i].selector], ["selected", "selected"]]);
+        } else {
+            appendElementAfterCreationWithInnerTextAndAttributes(select, "option", customerArray[i].name, [["value", customerArray[i].selector]]);
+        }
     }
+    let btnKunde = appendElementAfterCreationWithInnerTextAndAttributes(fieldset4, "button", "neuen Kunden anlegen", [["id", "newCustomerBtn"]]);
+    btnKunde.addEventListener("click", () => createCustomerFormFromBooking(fieldset4));
+    appendElementAfterCreationWithInnerTextAndAttributes(formfield, "input", "anlegen", [["type", "submit"], ["id", "bookingBtn"]]);
+    if (form.attachEvent) {
+        form.attachEvent("submit", () => createBooking);
+    } else {
+        form.addEventListener("submit", () => createBooking);
+    }
+    updateAvailableBikes();
 }
 
 function createListBookings(date) {
@@ -140,6 +186,6 @@ function createListBookings(date) {
     for (let i = 0; i < bookings.length; i++) {
         appendElementAfterCreationWithInnerTextAndAttributes(select, "option", bookings[i].name, [["value", bookings[i].ident]]);
     }
-    let button = appendElementAfterCreationWithAttributes(fieldset, "input", [["type", "button"], ["value", "Buchung bearbeiten"]]);
+    let button = appendElementAfterCreationWithAttributes(fieldset, "input", [["type", "button"], ["value", "Booking bearbeiten"]]);
     button.addEventListener("click", () => editBooking())
 }

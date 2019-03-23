@@ -41,7 +41,7 @@ function deleteBike(){
     for(let i= 0; i < bikeArray.length; i++){
         if (bikeArray[i].ident === ident.value){
             let bike = bikeArray[i];
-            delete bikeArray[i];
+            bikeArray.splice(i,1);
             console.log("Bike gelöscht: " + bike.name());
             break;
         }
@@ -64,11 +64,11 @@ function updateBikeList(){
     while (select4.firstChild) {
         select4.removeChild(select4.firstChild);
     }
-    if(bikeArray.length === 0){
+    if(customerArray.length === 0){
         appendElementAfterCreationWithInnerTextAndAttributes(select4, "option", "Kein Bike Eintrag gefunden", [["value","null"],["disabled","disabled"]]);
     } else {
-        for(let i = 0; i < bikeArray.length; i++){
-            appendElementAfterCreationWithInnerTextAndAttributes(select4, "option", bikeArray[i].name(), [["value",bikeArray[i].ident]]);
+        for(let i = 0; i < customerArray.length; i++){
+            appendElementAfterCreationWithInnerTextAndAttributes(select4, "option", customerArray[i].name(), [["value",customerArray[i].ident]]);
         }
     }
 }
@@ -185,7 +185,7 @@ function createBikeForm(body){
         appendElementAfterCreationWithInnerTextAndAttributes(select4, "option", "Kein Bike Eintrag gefunden", [["value","null"],["disabled","disabled"]]);
     } else {
         for(let i = 0; i < bikeArray.length; i++){
-            appendElementAfterCreationWithInnerTextAndAttributes(select4, "option", bikeArray[i].name(), [["value",bikeArray[i].ident]]);
+            appendElementAfterCreationWithInnerTextAndAttributes(select4, "option", customerArray[i].name(), [["value",customerArray[i].ident]]);
         }
     }
     appendElementAfterCreationWithAttributes(fieldset4, "span");

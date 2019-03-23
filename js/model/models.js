@@ -54,7 +54,8 @@ function getBezFromObject(object){
 }
 
 class Customer {
-    constructor(name, street, plz, city, phone) {
+    constructor(id, name, street, plz, city, phone) {
+        this.id = id;
         this.name = name;
         this.street = street;
         this.plz = plz;
@@ -67,11 +68,13 @@ function getCustomerFromObject(object){
     return new Customer(object.name, object.street, object.plz, object.city, object.phone);
 }
 
-class Buchung{
-    constructor(ident, bikes, kunde, abholzeitpunkt, abgabezeitpunkt) {
+class Booking{
+    constructor(ident, bikes, kunde, abholtag, abholzeitpunkt, abgabetag, abgabezeitpunkt) {
         this.ident = ident;
         this.bikes = bikes;
         this.kunde = kunde;
+        this.abholtag = abholtag;
+        this.abgabetag = abgabetag;
         this.abholzeitpunkt = abholzeitpunkt;
         this.abgabezeitpunkt = abgabezeitpunkt;
     }
@@ -91,7 +94,7 @@ function getBookingFromObject(object){
     for(let i = 0; i < object.bikes.length; i++){
         bikes.push(getBikeFromObject(object.bikes[i]));
     }
-    return new Buchung(ident, bikes, object.kunde, object.abholzeitpunkt, object.abgabezeitpunkt);
+    return new Booking(ident, bikes, object.kunde, object.abholtag, object.abholzeitpunkt,object.abgabetag, object.abgabezeitpunkt);
 }
 
 class Dates{

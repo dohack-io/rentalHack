@@ -23,8 +23,8 @@ function createMonthViewTable(body, date){
             appendElementAfterCreationWithInnerTextAndAttributes(trExtend, "td", pad(i, 2), [["colspan","1"],["rowspan","1"]]);
         }
     }
-    for(let i = 0; i < bikeArray.length; i++){
-        let bike = bikeArray[i];
+    for(let i = 0; i < customerArray.length; i++){
+        let bike = customerArray[i];
         let trBike = appendElementAfterCreationWithAttributes(table, "tr", [["id", "monthViewBike-" + bike.ident]]);
         appendElementAfterCreationWithInnerTextAndAttributes(trBike, "td", bike.ident, [["colspan","1"],["rowspan","1"]]);
         appendElementAfterCreationWithInnerTextAndAttributes(trBike, "td", bike.bez.name(), [["colspan","1"],["rowspan","1"]]);

@@ -25,6 +25,7 @@ body {
 #newBooking { grid-area: container; width: 100%; }
 #bookingList { grid-area: container2; width: 100%; }
 #monthViewDiv { grid-area: container3; width:100%; }
+#editCustomer { grid-area: container2; width: 100%; }
 
 #navigationTop { grid-area: nav; margin-bottom: 1em; }
 #location { grid-area: location; margin-bottom: 1em; }
