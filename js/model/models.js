@@ -5,6 +5,7 @@ class Bike {
         this.rahmennr = rahmennr;
         // serial number of the 'akku'
         this.akkuser = akkuser;
+        // the id of the store
         this.store = store;
         if (akkuser) {
             this.ebike = true;

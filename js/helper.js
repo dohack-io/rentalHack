@@ -110,6 +110,38 @@ Date.prototype.monthDays= function(){
 };
 
 
+function getCurrentDateObject(thisDay) {
+    let result;
+    result = dateArray.filter((x)=>{x.date===thisDay})
+    if(result.length === 1) {
+        return result[0];
+    }
+}
+
+
+function getBikesFromLocation(location) {
+    let result = 0;
+
+    for(let i = 0 ; i < bikeArray.length ; i += 1) {
+        if(bikeArray[i].store == location) {
+            result += 1;
+        }
+    }
+    return result;
+}
+
+
+function getBikesFromBooking(booking, location) {
+    let result = 0;
+
+    for(let i = 0 ; i < booking.bikes.length ; i += 1) {
+        if(booking.bikes[i].store == location) {
+            result += 1;
+        }
+    }
+    return result;
+}
+
 
 /** Observable Array **/
 
