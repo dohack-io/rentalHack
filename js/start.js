@@ -3,6 +3,7 @@ let bikeArray = new ObservableArray();
 let customerArray = new ObservableArray();
 let bookingArray = new ObservableArray();
 let storeArray = new ObservableArray();
+let dateArray = new ObservableArray();
 let test = true;
 let copyForTest = false;
 
@@ -92,6 +93,10 @@ function storeUpdateHandler(event, document, tEvent) {
     }
 }
 
+function dateUpdateHandler(event, document, tEvent) {
+    entityUpdateHandler(event, document, tEvent, dateArray, "dates", getDateFromObject);
+}
+
 let docLoader = function (syncClient) {
     if (test) {
         console.log("Started in test-mode");
@@ -99,6 +104,7 @@ let docLoader = function (syncClient) {
         loadDocument(syncClient, 'tbookings', bookingUpdateHandler, bookingArray);
         loadDocument(syncClient, 'tkunden', customerUpdateHandler, customerArray);
         loadDocument(syncClient, 'tstores', storeUpdateHandler, storeArray);
+        loadDocument(syncClient, 'tdates', dateUpdateHandler, dateArray);
     } else {
         loadDocument(syncClient, 'bikes', bikeUpdateHandler, bikeArray);
         loadDocument(syncClient, 'bookings', bookingUpdateHandler, bookingArray);
@@ -140,6 +146,7 @@ function removeAllDocuments() {
     bookingArray = [];
     customerArray = [];
     storeArray = [];
+    dateArray = [];
 }
 
 corsRequest("https://almond-dunlin-3705.twil.io/sync-token", reqListener);

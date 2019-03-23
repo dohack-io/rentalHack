@@ -34,6 +34,11 @@ function updateAvailableBikes(){
     return bikes;
 }
 
+
+function getBookingsForDate(dateTmp) {
+    return undefined;
+}
+
 function createBookingForm(date){
     let body = document.querySelector("body");
     let form = appendElementAfterCreationWithAttributes(body, "form", [["id", "newBooking"]]);
@@ -49,6 +54,7 @@ function createBookingForm(date){
     } else {
         appendElementAfterCreationWithAttributes(fieldset, "input", [["type","date"], ["id","startdate"]]);
     }
+    appendElementAfterCreationWithAttributes(fieldset, "input", [["type","time"], ["id","deliveryStartTime"]]);
     let fieldset1 = appendElementAfterCreationWithAttributes(form, "fieldset");
     appendElementAfterCreationWithInnerTextAndAttributes(fieldset1, "label", "Zeige Fahrräder von: *(multiselect)", [["for","storeSelector"]]);
     appendElementAfterCreationWithInnerText(fieldset1, "legend", "Ladenauswahl");
@@ -65,10 +71,28 @@ function createBookingForm(date){
     appendElementAfterCreationWithInnerText(fieldset2, "legend", "Rückgabetermin");
     appendElementAfterCreationWithInnerTextAndAttributes(fieldset2, "label", "Abgabetermin für Leihräder: ", [["for","enddate"]]);
     appendElementAfterCreationWithAttributes(fieldset2, "input", [["type","date"], ["id","enddate"], ["value",date]]);
-
-
-    let doc2 = appendElementAfterCreationWithAttributes(body, "form", [["id", "newBookingBikes"]]);
-    let fieldset3 =appendElementAfterCreationWithAttributes(doc2, "fieldset");
+    appendElementAfterCreationWithAttributes(fieldset2, "input", [["type","time"], ["id","deliveryEndTime"]]);
+    appendElementAfterCreationWithAttributes(body, "form", [["id", "newBookingBikes"]]);
+    let fieldset3 =appendElementAfterCreationWithAttributes(form, "fieldset");
     appendElementAfterCreationWithInnerText(fieldset3, "legend", "Räderauswahl");
     appendElementAfterCreationWithAttributes(fieldset3, "select", [["multiple","multiple"], ["id","bikeSelector"], ["required","required"]]);
+    let button = appendElementAfterCreationWithAttributes(fieldset3, "input", [["type","button"], ["value", "Buchung abschließen"]]);
+    button.addEventListener("click", () => updateBike())
+}
+
+function createListBookings(date) {
+    let body = document.querySelector("body");
+    let form = appendElementAfterCreationWithAttributes(body, "form", [["id", "bookingList"]]);
+    let fieldset = appendElementAfterCreationWithInnerText(form, "fieldset");
+    appendElementAfterCreationWithInnerText(fieldset, "legend", "Buchungen am ausgewählten Tag");
+    if(date){
+        let dateTmp = new Date(date.getFullYear(), date.getMonth(), date.getDate() + 1);
+    } else {
+        let dateTmp = new Date();
+    }
+    let select = appendElementAfterCreationWithAttributes(fieldset, "select", [["multiple","multiple"], ["id","bookingEditSelector"]]);
+    let bookings = getBookingsForDate(dateTmp);
+    for(let i = 0; i < bookings.length; i++){
+        appendElementAfterCreationWithInnerTextAndAttributes(select, "option", bookings[i].name, [["value",bookings[i].ident]]);
+    }
 }

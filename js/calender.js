@@ -63,6 +63,7 @@ function switchToDate(date) {
         //TODO Buchung init
         createStandartSiteContent(replaceBody());
         createBookingForm(date);
+        createListBookings(date);
     }
 }
 
