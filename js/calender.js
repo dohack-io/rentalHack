@@ -26,9 +26,33 @@ function createTable(table, date, fnc) {
                 // get an array of all current location id's
                 location = getCurrentStores();
 
-                for(let locationId in location) {
+                for(let locationId of location) {
                     // Reduce the number of Bikes at the current location by the number of Bikes in the Bookings
                     remainingBikes += remainingBikesInLocation(thisDay, locationId.ident);
+                    // TEST -- checking the content of the arrays -- TEST
+                    if(remainingBikes === 0) {
+                        console.log("current location : " , locationId);
+                        console.log("The content of the dateArray");
+                        for(let i = 0 ; i < dateArray.length ; i += 1) {
+                            console.log("Index " + i + " : " + dateArray[i].date);
+                        }
+                        console.log("The content of the bikeArray");
+                        for(let i = 0 ; i < bikeArray.length ; i += 1) {
+                            console.log("Index " + i + " : " + bikeArray[i].date);
+                        }
+                        console.log("The content of the customerArray");
+                        for(let i = 0 ; i < customerArray.length ; i += 1) {
+                            console.log("Index " + i + " : " + customerArray[i].name);
+                        }
+                        console.log("The content of the storeArray");
+                        for(let i = 0 ; i < storeArray.length ; i += 1) {
+                            console.log("Index " + i + " : " + storeArray[i].ident);
+                        }
+                        console.log("The content of the bookingArray");
+                        for(let i = 0 ; i < bookingArray.length ; i += 1) {
+                            console.log("Index " + i + " : " + bookingArray[i].ident);
+                        }
+                    }
                 }
 
                 // Create a div element that includes the result and add it to the class bottom-right
