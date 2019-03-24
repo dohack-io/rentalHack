@@ -25,13 +25,14 @@ function createTable(table, date, fnc) {
 
                 // get an array of all current location id's
                 location = getCurrentStores();
-
-                for(let locationId of location) {
+                for(let locationCandidate of location) {
                     // Reduce the number of Bikes at the current location by the number of Bikes in the Bookings
-                    remainingBikes += remainingBikesInLocation(thisDay, locationId.ident);
+                    for (let locationId of locationCandidate.selector){
+                        remainingBikes += remainingBikesInLocation(thisDay, locationId);
+                    }
                     // TEST -- checking the content of the arrays -- TEST
                     if(remainingBikes === 0) {
-                        console.log("current location : " , locationId);
+                        console.log("current location : " , locationCandidate);
                         console.log("The content of the dateArray");
                         for(let i = 0 ; i < dateArray.length ; i += 1) {
                             console.log("Index " + i + " : " + dateArray[i].date);
@@ -145,6 +146,7 @@ function createTableHead(){
 function createCalender(body){
     if(!body) {
         body = document.querySelector("body");
+        removeElemWithId("calender");
     }
     let div = appendElementAfterCreationWithAttributes(body, "div", [["id", "calender"]]);
     let head = appendElementAfterCreationWithAttributes(div, "div", [["id", "calenderHeader"]]);

@@ -21,7 +21,7 @@ function updateLocations() {
 }
 
 function changeLocation() {
-    createCalender
+    createCalender();
 }
 
 function getCurrentStores() {
