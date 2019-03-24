@@ -6,9 +6,22 @@ let storeArray = new ObservableArray();
 let dateArray = new ObservableArray();
 let test = true;
 let copyForTest = false;
+let restURL = "http://192.168.0.1:8080/";
 
 //loadingNav();
 
+function httpGet(theURL){
+    let xmlhttp = new XMLHttpRequest();
+    xmlhttp.open("GET", theURL, false);
+    xmlhttp.send(null);
+    return xmlhttp.responseText;
+}
+
+function loadDocumentFromNeo(restURL, api, conversionFNC, array) {
+    let data = conversionFNC(httpGet(restURL + api));
+    console.log("loaded " + data.length + api);
+    array = new ObservableArray(data);
+}
 
 function loadDocument(syncClient, docname, loadFnc, watchArray) {
     syncClient.document(docname)
@@ -96,6 +109,7 @@ function storeUpdateHandler(event, document, tEvent) {
 function dateUpdateHandler(event, document, tEvent) {
     entityUpdateHandler(event, document, tEvent, dateArray, "dates", getDateFromObject);
 }
+
 
 let docLoader = function (syncClient) {
     if (test) {
