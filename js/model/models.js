@@ -81,11 +81,11 @@ class Booking{
     }
 
     addBike(bike) {
-        bikes.push(bike);
+        this.bikes.push(bike);
     };
 
     removeBike(bike) {
-        bikes.splice(bikes.indexOf(bike), 1);
+        this.bikes.splice(this.bikes.indexOf(bike), 1);
     };
 }
 
@@ -104,19 +104,19 @@ class Dates{
         this.booking_ids = booking_id;
     }
 
-    addDate(date) {
-        date.push(date);
+    addBooking(booking_id) {
+        this.booking_ids.push(booking_id);
     };
 
-    removeDate(date) {
-        date.splice(date.indexOf(date), 1);
+    removeBooking(booking_id) {
+        this.booking_ids.splice(this.booking_ids.indexOf(booking_id), 1);
     };
 }
 
 function getDateFromObject(object){
     let bookings = [];
     for(let i = 0; i < object.booking_ids.length; i++){
-        bookings.push(getBookingFromObject(object.booking_ids[i]));
+        bookings.push(object.booking_ids[i]);
     }
     return new Dates(object.date, bookings);
 }

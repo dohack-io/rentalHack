@@ -140,14 +140,14 @@ function getCurrentDateObject(thisDay) {
     if(result.length === 1) {
         return result[0];
     }
+    return [];
 }
 
 
 function getBikesFromLocation(location) {
     let result = 0;
-
     for(let i = 0 ; i < bikeArray.length ; i += 1) {
-        if(bikeArray[i].store == location) {
+        if(bikeArray[i].store === location) {
             result += 1;
         }
     }
@@ -159,7 +159,7 @@ function getBikesFromBooking(booking, location) {
     let result = 0;
 
     for(let i = 0 ; i < booking.bikes.length ; i += 1) {
-        if(booking.bikes[i].store == location) {
+        if(booking.bikes[i].store === location) {
             result += 1;
         }
     }

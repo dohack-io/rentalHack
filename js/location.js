@@ -38,14 +38,13 @@ function getStoreFromIdent(ident) {
 
 
 function getCurrentStores() {
-    let selector = document.getElementById("storeSelector");
-    let options = selector && selector.options;
+    let selector = document.getElementById("location").firstChild;
+    let options = selector && selector.options ? selector.options : [];
     let selection = [];
     let stores = [];
 
     for (let i = 0; i < options.length; i++) {
         let selectedOption = options[i];
-
         if (selectedOption.selected) {
             if (selectedOption.value.includes(",")) {
                 let divider = selectedOption.value.split(",");
@@ -62,7 +61,7 @@ function getCurrentStores() {
 
     for (let i = 0; i < storeArray.length; i++) {
         for (let j = 0; j < selection.length; j++){
-            if (storeArray[i].store === selection[j]) {
+            if (storeArray[i].ident === selection[j]) {
                 stores.push(storeArray[i]);
                 break;
              }

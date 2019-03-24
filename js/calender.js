@@ -16,6 +16,7 @@ function createTable(table, date, fnc) {
             } else {
                 let td = document.createElement("td");
                 let thisDay = new Date(date.getFullYear(), date.getMonth(), j - dayOffset + 1);
+                let remainingBikes = 0;
                 td.addEventListener("click", () => fnc(thisDay));
 
                 // Create a div element that includes the day number and add it to the class top-left
@@ -27,7 +28,7 @@ function createTable(table, date, fnc) {
 
                 for(let locationId in location) {
                     // Reduce the number of Bikes at the current location by the number of Bikes in the Bookings
-                    remainingBikes += remainingBikesInLocation(thisDay, locationId);
+                    remainingBikes += remainingBikesInLocation(thisDay, locationId.ident);
                 }
 
                 // Create a div element that includes the result and add it to the class bottom-right
@@ -37,7 +38,6 @@ function createTable(table, date, fnc) {
                 td.classList.add("divide");
                 tr.append(td);
 
-                remainingBikes = 0;
             }
         }
         table.append(tr);
@@ -77,7 +77,7 @@ function clearTable(table) {
 function switchToDate(date) {
     if (date) {
         updateDate(date, 0);
-        //TODO Buchung init
+        removeElemWithId("newBooking");
         createBookingForm(date);
     }
 }
@@ -86,7 +86,7 @@ function switchToDate(date) {
 function remainingBikesInLocation(thisDay, location) {
 
     let dateObject;
-    let maxBikes = 0;
+    let maxBikes;
     let bikes = 0;
 
     // collect the date object that matches the current date
@@ -95,12 +95,14 @@ function remainingBikesInLocation(thisDay, location) {
     // Collect all Bikes ID's from the current location
     maxBikes = getBikesFromLocation(location);
 
-    for(let i = 0 ; i < dateObject.booking_ids.length ; i += 1) {
-        // Collect the bike ID's from a booking
-        bikes = getBikesFromBooking(dateObject.booking_ids[i]);
+    if (dateObject && dateObject.length !== 0){
+        for(let i = 0 ; i < dateObject.booking_ids.length; i += 1) {
+            // Collect the bike ID's from a booking
+            bikes = getBikesFromBooking(dateObject.booking_ids[i]);
 
-        // Subtract the number of Bikes ID's from the current location that match the booking
-        maxBikes = maxBikes - bikes;
+            // Subtract the number of Bikes ID's from the current location that match the booking
+            maxBikes = maxBikes - bikes;
+        }
     }
     return maxBikes;
 }
