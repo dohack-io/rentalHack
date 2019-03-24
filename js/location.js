@@ -5,7 +5,7 @@ function createLocation(body) {
     let div = appendElementAfterCreationWithAttributes(body, "div", [["id", "location"]]);
     let select = appendElementAfterCreationWithAttributes(div, "select");
     if (storeArray.length !== 0) {
-        select.addEventListener("change", () => changeLocation(select.value));
+        select.addEventListener("change", () => changeLocation());
         for (let i = 0; i < storeArray.length; i++) {
             appendElementAfterCreationWithInnerTextAndAttributes(select, "option", storeArray[i].name, [["value", storeArray[i].ident]]);
         }
@@ -20,22 +20,9 @@ function updateLocations() {
     createLocation();
 }
 
-function changeLocation(code) {
-    let store = getStoreFromIdent(code);
-    if (store) {
-        //TODO
-    }
+function changeLocation() {
+    createCalender
 }
-
-function getStoreFromIdent(ident) {
-    for (let i = 0; storeArray[i]; i++) {
-        if (storeArray[i].ident === ident) {
-            return storeArray[i];
-        }
-    }
-    return null;
-}
-
 
 function getCurrentStores() {
     let selector = document.getElementById("location").firstChild;

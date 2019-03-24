@@ -119,6 +119,9 @@ function createTableHead(){
 }
 
 function createCalender(body){
+    if(!body) {
+        body = document.querySelector("body");
+    }
     let div = appendElementAfterCreationWithAttributes(body, "div", [["id", "calender"]]);
     let head = appendElementAfterCreationWithAttributes(div, "div", [["id", "calenderHeader"]]);
     appendElementAfterCreationWithInnerTextAndAttributes(head,"button", " < ", [["id", "decMonth"]]);
